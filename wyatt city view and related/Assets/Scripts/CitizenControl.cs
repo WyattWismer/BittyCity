@@ -25,7 +25,7 @@ public class CitizenControl : MonoBehaviour
     {
         GameObject new_citizen = Instantiate(citizenPrefab, new Vector3(0.5f + i, heightOffset, 0.5f + j), Quaternion.identity);
         new_citizen.AddComponent<Citizen>();
-        new_citizen.GetComponent<Citizen>().setup(structureControl);
+        new_citizen.GetComponent<Citizen>().setup(structureControl, new Node(i, j));
     }
 }
 

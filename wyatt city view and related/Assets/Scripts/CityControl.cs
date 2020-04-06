@@ -33,6 +33,9 @@ public class CityControl : MonoBehaviour
         structureControl.addSidewalk(11, 9);
         structureControl.addSidewalk(13, 9);
         //
-        citizenControl.addCitizen(12, 11);
+        citizenControl.addCitizen(13, 11);
+        //citizenControl.addCitizen(12, 11);
+        //citizenControl.addCitizen(11, 11);
+        
     }
 }

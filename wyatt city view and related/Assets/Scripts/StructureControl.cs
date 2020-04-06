@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,9 +10,8 @@ public class StructureControl : MonoBehaviour
     public StructuresInfo buildingInfo;
     public Text numSidewalkText;
     public Text numBuildingText;
+
     static private int gridWidth = 25;
-
-
     private int numSidewalks = 0;
     private int numBuildings = 0;
 
@@ -19,10 +19,13 @@ public class StructureControl : MonoBehaviour
     // 0 is empty, 1 is sidewalk, 2 is building
     private int[,] grid = new int[gridWidth, gridWidth];
 
+    private SortedSet<Node> sidewalks = new SortedSet<Node>();
+    private SortedSet<Node> buildings = new SortedSet<Node>();
+    private static readonly System.Random random = new System.Random();
+
     // Start is called before the first frame update
     void Start()
     {
-
         displayNumSidewalks();
         displayNumBuildings();
     }
@@ -35,6 +38,7 @@ public class StructureControl : MonoBehaviour
 
     public void addSidewalk(int i, int j)
     {
+        sidewalks.Add(new Node(i, j));
         sidewalkInfo.addStructure(i, j);
         grid[i, j] = 1;
         numSidewalks++;
@@ -43,6 +47,7 @@ public class StructureControl : MonoBehaviour
 
     public void removeSidewalk(int i, int j)
     {
+        sidewalks.Remove(new Node(i, j));
         sidewalkInfo.removeStructure(i, j);
         grid[i, j] = 0;
         numSidewalks--;
@@ -51,6 +56,7 @@ public class StructureControl : MonoBehaviour
 
     public void addBuilding(int i, int j)
     {
+        buildings.Add(new Node(i, j));
         buildingInfo.addStructure(i, j);
         grid[i, j] = 2;
         numBuildings++;
@@ -59,10 +65,21 @@ public class StructureControl : MonoBehaviour
 
     public void removeBuilding(int i, int j)
     {
+        buildings.Remove(new Node(i, j));
         buildingInfo.removeStructure(i, j);
         grid[i, j] = 0;
         numBuildings--;
         displayNumBuildings();
+    }
+
+    public Node getRandomSidewalk()
+    {
+        return sidewalks.ElementAt(random.Next(sidewalks.Count));
+    }
+
+    public Node getRandomBuilding()
+    {
+        return buildings.ElementAt(random.Next(buildings.Count));
     }
 
     void displayNumSidewalks()
@@ -121,7 +138,7 @@ public class StructureControl : MonoBehaviour
 }
 
 
-public class Node
+public class Node : System.IComparable
 {
     public int i;
     public int j;
@@ -194,7 +211,26 @@ public class Node
     {
         return !(a == b);
     }
+    public int CompareTo(object other)
+    {
+        if (other == null) return 1;
 
+        Node otherNode = other as Node;
+        if (otherNode != null)
+        {
+            int ci = i.CompareTo(otherNode.i);
+            int cj = j.CompareTo(otherNode.j);
+            if (ci == 0)
+            {
+                return cj;
+            }
+            return ci;
+        }
+        else
+        {
+            throw new System.ArgumentException("Object is not a Node");
+        }
+    }
 }
 
 public class Path
@@ -217,6 +253,10 @@ public class Path
             }
         }
         nodes.Add(x);
+    }
+    public Node getNode(int i)
+    {
+        return nodes[i];
     }
     public int size()
     {
