@@ -24,8 +24,8 @@ public class CityControl : MonoBehaviour
         structureControl.addBuilding(12, 12);
         // testing
         structureControl.addSidewalk(12, 11);
-        structureControl.addSidewalk(11, 11);
-        structureControl.addSidewalk(13, 11);
+        //structureControl.addSidewalk(11, 11);
+        //structureControl.addSidewalk(13, 11);
         /*
         structureControl.addSidewalk(10, 11);
         structureControl.addSidewalk(11, 10);
@@ -35,9 +35,9 @@ public class CityControl : MonoBehaviour
         structureControl.addSidewalk(13, 9);
         */
         //
-        for(int i=0; i<1000; i++)
+        for(int i=0; i<2; i++)
         {
-            citizenControl.addCitizen(13, 11);
+            citizenControl.addCitizen(12, 11);
         }
         /*
         citizenControl.addCitizen(13, 11);
