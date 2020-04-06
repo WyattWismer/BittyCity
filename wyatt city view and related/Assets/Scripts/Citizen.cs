@@ -81,33 +81,112 @@ public static class ActionFactory
     private static readonly System.Random random = new System.Random();
     public static Action getAction(Citizen _parent)
     {
-        int action_choice = random.Next(2);
-        switch (action_choice)
+        while (true)
         {
-            case 0:
-                return new walkToSidewalkAction(_parent);
-            case 1:
-                return new walkToBuildingAction(_parent);
-            default:
-                throw new System.ArgumentException("Not a valid action");
+            int action_choice = random.Next(5);
+            switch (action_choice)
+            {
+                case 0:
+                    return new walkToSidewalkAction(_parent);
+                case 1:
+                    return new walkToBuildingAction(_parent);
+                case 2:
+                case 3:
+                    Node sidewalk_dst = tryToGetDesination(_parent);
+                    if (sidewalk_dst == null) continue;
+                    return new CreateSidewalkAction(_parent, sidewalk_dst);
+                case 4:
+                    Node building_dst = tryToGetDesination(_parent);
+                    if (building_dst == null) continue;
+                    return new CreateBuildingAction(_parent, building_dst);
+                default:
+                    throw new System.ArgumentException("Not a valid action");
+            }
         }
+    }
+
+    public static Node tryToGetDesination(Citizen _parent)
+    {
+        if (_parent.structureControl.inBuilding(_parent.location)) return null; // citizen is inside building
+        Node destination = _parent.structureControl.getStructureLocation(_parent.location);
+        return destination;
     }
 }
 
 public abstract class Action
 {
+    protected Citizen parent;
+    public Action(Citizen _parent)
+    {
+        parent = _parent;
+    }
     public abstract bool Update();
+}
+
+
+public class CreateSidewalkAction : Action
+{
+    private Node destination;
+    private float workRemaining;
+    private float workSpeed;
+    private Object fakeSidewalk;
+
+    public CreateSidewalkAction(Citizen _parent, Node _destination) : base(_parent)
+    {
+        destination = _destination;
+        workSpeed = 75;
+        workRemaining = 100;
+        fakeSidewalk = _parent.structureControl.createFakeSidewalk(destination.i, destination.j);
+    }
+
+    public override bool Update()
+    {
+        workRemaining -= workSpeed * Time.deltaTime;
+        if(workRemaining <= 0)
+        {
+            parent.structureControl.addSidewalk(destination.i, destination.j);
+            parent.structureControl.destroyObject(fakeSidewalk);
+            return true;
+        }
+        return false;
+    }
+}
+
+public class CreateBuildingAction : Action
+{
+    private Node destination;
+    private float workRemaining;
+    private float workSpeed;
+    private Object fakeBuilding;
+
+    public CreateBuildingAction(Citizen _parent, Node _destination) : base(_parent)
+    {
+        destination = _destination;
+        workSpeed = 25;
+        workRemaining = 100;
+        fakeBuilding = _parent.structureControl.createFakeBuilding(destination.i, destination.j);
+    }
+
+    public override bool Update()
+    {
+        workRemaining -= workSpeed * Time.deltaTime;
+        if (workRemaining <= 0)
+        {
+            parent.structureControl.addBuilding(destination.i, destination.j);
+            parent.structureControl.destroyObject(fakeBuilding);
+            return true;
+        }
+        return false;
+    }
 }
 
 public abstract class NavigationAction : Action
 {
-    private Citizen parent;
     private Path path;
     private int path_index;
 
-    protected NavigationAction(Citizen _parent, Node _destination)
+    protected NavigationAction(Citizen _parent, Node _destination) : base(_parent)
     {
-        parent = _parent;
         path = parent.structureControl.shortest_path(_parent.location, _destination);
         path_index = 0;
     }

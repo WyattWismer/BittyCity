@@ -72,6 +72,23 @@ public class StructureControl : MonoBehaviour
         displayNumBuildings();
     }
 
+    public Node getStructureLocation(Node node)
+    {
+        List<Node> options = new List<Node>();
+        foreach (Node nxt in node.getNeighbors(gridWidth))
+        {
+            if (grid[nxt.i, nxt.j] == 0)
+            {
+                options.Add(nxt);
+            }
+        }
+        if (options.Count == 0)
+        {
+            return null;
+        }
+        return options.ElementAt(random.Next(options.Count));
+    }
+
     public Node getRandomSidewalk()
     {
         return sidewalks.ElementAt(random.Next(sidewalks.Count));
@@ -82,6 +99,27 @@ public class StructureControl : MonoBehaviour
         return buildings.ElementAt(random.Next(buildings.Count));
     }
 
+    public Object createFakeSidewalk(int i, int j)
+    {
+        grid[i, j] = -1;
+        return sidewalkInfo.createFakeStructure(i, j);
+    }
+
+    public Object createFakeBuilding(int i, int j)
+    {
+        grid[i, j] = -1;
+        return buildingInfo.createFakeStructure(i, j);
+    }
+
+    public bool inBuilding(Node node)
+    {
+        if(buildings.Contains(node))
+        {
+            return true;
+        }
+        return false;
+    }
+
     void displayNumSidewalks()
     {
         numSidewalkText.text = "# Sidewalks: " + numSidewalks.ToString();
@@ -90,6 +128,11 @@ public class StructureControl : MonoBehaviour
     void displayNumBuildings()
     {
         numBuildingText.text = "# Buildings: " + numBuildings.ToString();
+    }
+
+    public void destroyObject(Object obj)
+    {
+        Destroy(obj);
     }
 
     public Path shortest_path(Node strt, Node end)
@@ -111,7 +154,7 @@ public class StructureControl : MonoBehaviour
 
             foreach (Node nxt in x.getNeighbors(gridWidth))
             {
-                if (grid[nxt.i, nxt.j] != 0 && parent[nxt.i, nxt.j] == null)
+                if (grid[nxt.i, nxt.j] > 0 && parent[nxt.i, nxt.j] == null)
                 {
                     parent[nxt.i, nxt.j] = x;
                     q.Enqueue(nxt);

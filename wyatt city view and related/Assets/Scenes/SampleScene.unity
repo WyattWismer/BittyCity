@@ -911,6 +911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structurePrefab: {fileID: 6397160516825798139, guid: 05e396992a048ba479d228c516c9d767,
     type: 3}
+  transparentStructurePrefab: {fileID: 6397160516825798139, guid: 9c17d655bc7faff4b9ae7c0b3a275e54,
+    type: 3}
   heightOffset: 0.05
 --- !u!1 &2066058298
 GameObject:
@@ -942,6 +944,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structurePrefab: {fileID: 1755165524820705959, guid: ccfd9c165073211428d571f40596230e,
+    type: 3}
+  transparentStructurePrefab: {fileID: 1755165524820705959, guid: 039736b6eebc9304087dd63641f88279,
     type: 3}
   heightOffset: 0.5
 --- !u!4 &2066058300

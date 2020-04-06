@@ -5,6 +5,7 @@ using UnityEngine;
 public class StructuresInfo : MonoBehaviour
 {
     public GameObject structurePrefab;
+    public GameObject transparentStructurePrefab;
     public float heightOffset;
     private Object[,] grid = new Object[25, 25];
 
@@ -21,9 +22,19 @@ public class StructuresInfo : MonoBehaviour
 
     }
 
+    private Object create(int i, int j, GameObject prefab)
+    {
+        return Instantiate(prefab, new Vector3(0.5f + i, heightOffset, 0.5f + j), Quaternion.identity);
+    }
+
+    public Object createFakeStructure(int i, int j)
+    {
+        return create(i, j, transparentStructurePrefab);
+    }
+
     public void addStructure(int i, int j)
     {
-        grid[i,j] = Instantiate(structurePrefab, new Vector3(0.5f + i, heightOffset, 0.5f + j), Quaternion.identity);
+        grid[i, j] = create(i, j, structurePrefab);
     }
 
     public void removeStructure(int i, int j)
