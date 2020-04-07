@@ -13,14 +13,17 @@ public class ShopControl : MonoBehaviour
     
     public static void loadShopScreen()
 	{
-        ShopScreen.displayItems(itemPrices);
+      
+        ShopScreen.displayItems();
     }
 
    
 
     public void purchaseItem()
 	{
-        Item item = shopScreen.getSelectedItem();
+        string itemInfo = shopScreen.getSelectedItem();
+        if (itemInfo == null) return;
+        Item item = itemHolder.itemConverter(itemInfo);
         if (checkPurchase(item)){
             shopScreen.acceptItemPurchase();
             //Update usercurrency

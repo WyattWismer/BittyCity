@@ -6,25 +6,27 @@ using UnityEngine.EventSystems;
 public class ShopScreen : ItemDisplayer
 {
 
-	public GameObject itemSelected;
 	public Transform shop;
 	public Text itemText;
 
-	public static void displayItems(Dictionary<Item, int> itemPrices)
+	public static void displayItems()
 	{
 
 	}
 
 	public void acceptItemPurchase()
 	{
-		itemSelected = EventSystem.current.currentSelectedGameObject;
-		Debug.Log(itemSelected);
+		
 	}
-    
 
+  
 	public void Start()
 	{
-		shop = transform.Find("Shop");
+		//shop = transform.Find("Shop");
+		//itemSelected = shop.Find("building").gameObject;
+		//GameObject obj = Instantiate(itemSelected, shop);
+		//obj.layer = 5;
+        
 		
 	}
 
@@ -32,4 +34,5 @@ public class ShopScreen : ItemDisplayer
 	{
 		acceptItemPurchase();
 	}
+
 }
