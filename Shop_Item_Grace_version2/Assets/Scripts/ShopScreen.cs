@@ -5,13 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class ShopScreen : ItemDisplayer
 {
+    //it will be attached to panel
+	public static Transform panel;
+	public static Text userWallet;
 
-	public Transform shop;
-	public Text itemText;
-
-	public static void displayItems()
+    public static void displayItems()
 	{
 
+	}
+	public static void displayWallet(int amount)
+	{
+		userWallet = GameObject.Find("wallet").GetComponent<Text>();
+		userWallet.text = "Wallet: $" + amount.ToString();
 	}
 
 	public void acceptItemPurchase()
@@ -22,12 +27,7 @@ public class ShopScreen : ItemDisplayer
   
 	public void Start()
 	{
-		//shop = transform.Find("Shop");
-		//itemSelected = shop.Find("building").gameObject;
-		//GameObject obj = Instantiate(itemSelected, shop);
-		//obj.layer = 5;
-        
-		
+		displayWallet(100);
 	}
 
     public void Update()

@@ -17,8 +17,6 @@ public class ShopControl : MonoBehaviour
         ShopScreen.displayItems();
     }
 
-   
-
     public void purchaseItem()
 	{
         string itemInfo = shopScreen.getSelectedItem();
@@ -28,12 +26,13 @@ public class ShopControl : MonoBehaviour
             shopScreen.acceptItemPurchase();
             //Update usercurrency
 			shopConents.changeCurrency(item);
+            ShopScreen.displayWallet(shopConents.getCurrency());
             ItemControl.transferToInventory(item);
         }
         return;
     }
 
-    public bool checkPurchase(Item item) 
+    private bool checkPurchase(Item item) 
 	{
 		//check if user has sufficient money
 		if (shopConents.checkPurchase(item) >= 0)
