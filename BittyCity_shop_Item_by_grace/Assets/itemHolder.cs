@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class ItemHolder
 {
-    protected List<Item> items;
-
+   protected Dictionary<Item, price> items;
 
    public ItemHolder()
 	{
-
+        items = new Dictionary<Item, price>();
 	}
-   public List<Item> getItems()
+
+	public void updateShopItem(string name, int price, string description)
+	{
+        
+	}
+
+
+   public Dictionary<Item, price> getItems()
 	{
         return this.items;
 	}
 
-    public Dictionary<Item, int> generateItemPrices()
-	{
-        Dictionary<Item, int> itemPrices = new Dictionary<Item, int>();
-        itemPrices.Add(new Item("a", 1, "item a"), 1);
-        itemPrices.Add(new Item("b", 2, "item b"), 2);
-        return itemPrices;
-	}
+    
 }
 

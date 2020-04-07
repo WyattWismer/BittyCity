@@ -6,18 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class ShopScreen : ItemDisplayer {
 
-    public ShopScreen()
-	{
-	}
+    
 
 	public void displayItems(Dictionary<Item, int> itemPrices)
 	{
+       foreach(Item item in itemPrices.Keys)
+		{
 
+		}
 	}
 
     public void acceptItemPurchase()
 	{
 		deselectItem();
 	}
-     
+
 }
