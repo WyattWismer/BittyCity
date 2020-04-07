@@ -31,7 +31,7 @@ namespace InventControlApplication
 
 		public bool isinventoryHidden()
 		{
-
+			return true;
 		}
 	}
 }

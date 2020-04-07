@@ -1,15 +1,18 @@
 ﻿<Properties StartupConfiguration="{AD96DA2D-CA3B-EED1-3179-11771B567399}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NewClass1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/item.cs">
     <Files>
-      <File FileName="Assets/NewClass.cs" Line="1" Column="1" />
-      <File FileName="Assets/NewClass1.cs" Line="1" Column="1" />
+      <File FileName="Assets/InventControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/InventContent.cs" />
+      <File FileName="Assets/item.cs" Line="21" Column="35" />
+      <File FileName="Assets/itemControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/itemHolder.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="itemHolder.cs" selected="True" />
+              <Node name="item.cs" selected="True" />
             </Node>
           </Node>
         </State>

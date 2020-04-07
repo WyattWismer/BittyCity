@@ -2,8 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class itemControl : MonoBehaviour
+public class ItemControl : MonoBehaviour
 {
+
+    public ItemControl()
+	{
+
+	}
+
+    public void transferToInventory(Item item)
+	{
+
+	}
+
+    public void useItem(Item item)
+	{
+
+	}
+
+    public void cancelUseItem()
+	{
+
+	}
+
+    public void itemUsed()
+	{
+
+	}
+
+    public void loadShop()
+	{
+        ShopControl.loadShopScreen();
+	}
+
+    public void toggleInventory()
+	{
+
+	}
     // Start is called before the first frame update
     void Start()
     {

@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class item1 : MonoBehaviour
+public class ItemDisplayer 
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Item selectedItem;
+
+    public ItemDisplayer()
+	{
+
+	}
+
+    public void selectItem(Item selectedItem)
     {
-        
+        this.selectedItem = selectedItem;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void deselectItem()
+	{
+        this.selectedItem = null;
+	}
+
+     
 }

@@ -4,6 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class shopMenu : MonoBehaviour {
+public class ShopScreen : ItemDisplayer {
 
+    public ShopScreen()
+	{
+	}
+
+	public void displayItems(Dictionary<Item, int> itemPrices)
+	{
+
+	}
+
+    public void acceptItemPurchase()
+	{
+		deselectItem();
+	}
+     
 }
