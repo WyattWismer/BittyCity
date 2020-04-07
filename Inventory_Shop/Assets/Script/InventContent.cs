@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 
-public class shopContent : ItemHolder
+public class InventContent : ItemHolder
 {
     private int ItemAmounts;
+
+    public InventContent
+    {
+    	ItemAmounts = 0;
+    }
 
 	public int getItemAmounts()
 	{
@@ -11,25 +16,13 @@ public class shopContent : ItemHolder
 
 	public void addItem(Item i)
 	{
-		InventList.Add(i);
+		items.Add(i);
 		ItemAmounts++;
 	}
 
 	public void removeItem(Item i)
 	{
-		InventList.Remove(i);
+		items.Remove(i);
 		ItemAmounts--;
 	}
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

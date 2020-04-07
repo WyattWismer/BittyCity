@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDisplayer 
+public class ItemDisplayer : MonoBehaviour
 {
     protected Item selectedItem;
 
-    public ItemDisplayer()
-	{
-
-	}
-
+   
     public void selectItem(Item selectedItem)
     {
         this.selectedItem = selectedItem;
@@ -19,6 +15,11 @@ public class ItemDisplayer
     public void deselectItem()
 	{
         this.selectedItem = null;
+	}
+
+    public Item getSelectedItem()
+	{
+        return selectedItem;
 	}
 
      

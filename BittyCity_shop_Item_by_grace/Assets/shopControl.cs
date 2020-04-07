@@ -6,9 +6,7 @@ public class ShopControl : MonoBehaviour
 {
     private ShopScreen shopScreen;
     private ShopConents shopConents;
-    public GameObject panel;
-    private MeshRenderer myRenderer;
-
+   
 
     public ShopControl()
 	{
@@ -18,13 +16,21 @@ public class ShopControl : MonoBehaviour
 	}
     public static void loadShopScreen()
 	{
-        
-	}
+
+    }
+
 
     public void purchaseItem()
 	{
-        shopScreen.acceptItemPurchase();
-	}
+        Item item = shopScreen.getSelectedItem();
+        if (checkPurchase(item)){
+            shopScreen.acceptItemPurchase();
+            //Update usercurrency
+			shopConents.changeCurrency(item);
+            ItemControl.transferToInventory(item);
+        }
+        return;
+    }
 
     public bool checkPurchase(Item item) 
 	{
@@ -36,14 +42,14 @@ public class ShopControl : MonoBehaviour
         return false;
 	}
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
     {
         Debug.Log(shopConents.getItemPrices().Count);
-    }
+	}
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
