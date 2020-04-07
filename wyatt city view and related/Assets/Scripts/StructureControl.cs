@@ -14,6 +14,7 @@ public class StructureControl : MonoBehaviour
     static private int gridWidth = 25;
     private int numSidewalks = 0;
     private int numBuildings = 0;
+    private Node deadSpot;
 
 
     // 0 is empty, 1 is sidewalk, 2 is building
@@ -72,6 +73,18 @@ public class StructureControl : MonoBehaviour
         displayNumBuildings();
     }
 
+    public void removeStructure(int i, int j)
+    {
+        if (grid[i, j] == 1)
+        {
+            removeSidewalk(i, j);
+        }
+        else if (grid[i, j] == 2)
+        {
+            removeBuilding(i, j);
+        }
+    }
+
     public Node getStructureLocation(Node node)
     {
         List<Node> options = new List<Node>();
@@ -99,26 +112,105 @@ public class StructureControl : MonoBehaviour
         return buildings.ElementAt(random.Next(buildings.Count));
     }
 
-    public Object createFakeSidewalk(int i, int j)
+    public Object createFakeSidewalk(int i, int j, bool block_spot = true)
     {
-        grid[i, j] = -1;
+        if (block_spot)
+        {
+            grid[i, j] = -1;
+        }
         return sidewalkInfo.createFakeStructure(i, j);
     }
 
-    public Object createFakeBuilding(int i, int j)
+    public Object createFakeBuilding(int i, int j, bool block_spot = true)
     {
-        grid[i, j] = -1;
+        if (block_spot)
+        {
+            grid[i, j] = -1;
+        }
         return buildingInfo.createFakeStructure(i, j);
+    }
+
+    public void createDeadSpot(int i, int j)
+    {
+        if (grid[i, j] <= 0)
+        {
+            // Can't bomb an empty spot
+            return;
+        }
+
+        if (deadSpot != null)
+        {
+            restoreSpot();
+        }
+        deadSpot = new Node(i, j);
+        // remove old structure
+        removeSpot();
+        // create dead structure
+        if (grid[i, j] == 1) // sidewalk
+        {
+            sidewalkInfo.addDeadStructure(i, j);
+        }
+        else if (grid[i, j] == 2) // building
+        {
+            buildingInfo.addDeadStructure(i, j);
+        }
+        else
+        {
+            throw new System.ArgumentException("Impossible dead spot");
+        }
+    }
+
+    private void removeSpot()
+    {
+        int i = deadSpot.i;
+        int j = deadSpot.j;
+        if (grid[i, j] == 1) // dead sidewalk
+        {
+            sidewalkInfo.removeStructure(i, j);
+        }
+        else if (grid[i, j] == 2) // dead building
+        {
+            buildingInfo.removeStructure(i, j);
+        }
+
+    }
+
+    public void restoreSpot()
+    {
+        if (deadSpot == null) return; // nothing to restore
+        removeSpot();
+        int i = deadSpot.i;
+        int j = deadSpot.j;
+        if (grid[i, j] == 1) // sidewalk
+        {
+            sidewalkInfo.addStructure(i, j);
+        }
+        else if (grid[i, j] == 2) // building
+        {
+            buildingInfo.addStructure(i, j);
+        }
+        deadSpot = null;
+    }
+
+
+    public bool isEmpty(int i, int j)
+    {
+        return grid[i, j] == 0;
+    }
+
+    public bool isStructure(int i, int j)
+    {
+        return grid[i, j] > 0;
     }
 
     public bool inBuilding(Node node)
     {
-        if(buildings.Contains(node))
+        if (buildings.Contains(node))
         {
             return true;
         }
         return false;
-    }
+    } 
 
     void displayNumSidewalks()
     {

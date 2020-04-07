@@ -6,6 +6,7 @@ public class StructuresInfo : MonoBehaviour
 {
     public GameObject structurePrefab;
     public GameObject transparentStructurePrefab;
+    public GameObject deadStructurePrefab;
     public float heightOffset;
     private Object[,] grid = new Object[25, 25];
 
@@ -30,6 +31,11 @@ public class StructuresInfo : MonoBehaviour
     public Object createFakeStructure(int i, int j)
     {
         return create(i, j, transparentStructurePrefab);
+    }
+
+    public void addDeadStructure(int i, int j)
+    {
+        grid[i, j] = create(i, j, deadStructurePrefab);
     }
 
     public void addStructure(int i, int j)

@@ -55,10 +55,18 @@ public static class ActionFactory
             switch (action_choice)
             {
                 case 0:
-                    return new walkToSidewalkAction(_parent);
+                    Node rand_sidewalk_dst = _parent.structureControl.getRandomSidewalk();
+                    Path rand_sidewalk_path = _parent.structureControl.shortest_path(_parent.location, rand_sidewalk_dst);
+                    if (rand_sidewalk_path == null) continue;
+                    return new NavigationAction(_parent, rand_sidewalk_path);
+                //return new walkToSidewalkAction(_parent);
                 case 1:
                 case 2:
-                    return new walkToBuildingAction(_parent);
+                    Node rand_building_dst = _parent.structureControl.getRandomBuilding();
+                    Path rand_building_path = _parent.structureControl.shortest_path(_parent.location, rand_building_dst);
+                    if (rand_building_path == null) continue;
+                    return new NavigationAction(_parent, rand_building_path);
+                //return new walkToBuildingAction(_parent);
                 case 3:
                 case 4:
                 case 5:
@@ -208,21 +216,28 @@ public class CreateBuildingAction : Action
     }
 }
 
-public abstract class NavigationAction : Action
+public class NavigationAction : Action
 {
     private Path path;
     private int path_index;
 
+    /*
     protected NavigationAction(Citizen _parent, Node _destination) : base(_parent)
     {
         path = parent.structureControl.shortest_path(_parent.location, _destination);
+        path_index = 0;
+    }
+    */
+    public NavigationAction(Citizen _parent, Path _path) : base(_parent)
+    {
+        path = _path;
         path_index = 0;
     }
 
     public override bool Update()
     {
         // see if we have completed the path
-        if (path_index == path.size())
+        if (path == null || path_index == path.size())
         {
             return true;
         }
@@ -249,10 +264,12 @@ public abstract class NavigationAction : Action
     }
 }
 
+/*
 public class walkToSidewalkAction : NavigationAction
 {
     public walkToSidewalkAction(Citizen _parent) : base(_parent, _parent.structureControl.getRandomSidewalk())
     {
+
     }
 }
 
@@ -262,4 +279,5 @@ public class walkToBuildingAction : NavigationAction
     {
     }
 }
+*/
 
