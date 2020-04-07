@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDisplayer : MonoBehaviour
+public class ItemDisplayer 
 {
-    private Item selectedItem;
+    protected Item selectedItem;
 
     public ItemDisplayer()
 	{

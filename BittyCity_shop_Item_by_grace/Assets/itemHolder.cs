@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemHolder : MonoBehaviour
+public class ItemHolder
 {
-    private List<Item> items;
+    protected List<Item> items;
 
 
    public ItemHolder()

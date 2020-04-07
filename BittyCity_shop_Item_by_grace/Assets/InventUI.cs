@@ -10,7 +10,7 @@ namespace InventUIApplication
 
 		public Item getSelectedItem()
 		{
-
+			return new Item("", 1,"");
 		}
 	}
 }

@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 
 public class ShopScreen : ItemDisplayer {
+
     public ShopScreen()
 	{
-
 	}
 
 	public void displayItems(Dictionary<Item, int> itemPrices)
@@ -17,7 +17,7 @@ public class ShopScreen : ItemDisplayer {
 
     public void acceptItemPurchase()
 	{
-
+		deselectItem();
 	}
      
 }

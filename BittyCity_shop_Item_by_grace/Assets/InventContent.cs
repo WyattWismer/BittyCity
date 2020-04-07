@@ -7,7 +7,7 @@ public class InventContent : MonoBehaviour
 	public GameObject structurePrefab;
 	public GameObject transparentStructurePrefab;
 	public float heightOffset;
-	private Object[,] grid = new Object[25, 25];
+	private UnityEngine.Object[,] grid = new UnityEngine.Object[25, 25];
 
 
 	// Start is called before the first frame update

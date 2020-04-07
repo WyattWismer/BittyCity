@@ -12,17 +12,33 @@ public class ShopControl : MonoBehaviour
 
     public ShopControl()
 	{
-        shopConents = new ShopConents(new Dictionary<Item, int>(), 100);
+        ItemHolder itemHolder = new ItemHolder();
+        shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
         shopScreen = new ShopScreen();
 	}
-    public void loadShopScreen()
+    public static void loadShopScreen()
 	{
-
+        
 	}
-    // Start is called before the first frame update
-    void Start()
+
+    public void purchaseItem()
+	{
+        shopScreen.acceptItemPurchase();
+	}
+
+    public bool checkPurchase(Item item) 
+	{
+		//check if user has sufficient money
+		if (shopConents.checkPurchase(item) >= 0)
+		{
+            return true;
+		}
+        return false;
+	}
+	// Start is called before the first frame update
+	void Start()
     {
-        Debug.Log("sj");
+        Debug.Log(shopConents.getItemPrices().Count);
     }
 
     // Update is called once per frame

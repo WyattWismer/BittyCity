@@ -28,6 +28,11 @@ public class ShopConents : ItemHolder
         return this.userCurrency;
 	}
 
+    public int checkPurchase(Item item)
+	{
+        return userCurrency - itemPrices[item];
+	}
+
     // Start is called before the first frame update
     void Start()
     {

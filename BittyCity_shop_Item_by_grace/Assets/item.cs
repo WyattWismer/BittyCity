@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item 
 {
     private itemSprite sprite;
     private itemInfo info;
@@ -35,7 +35,7 @@ public class Item : MonoBehaviour
    
 }
 
-public class itemSprite : MonoBehaviour
+public class itemSprite
 {
     public itemSprite()
     {
@@ -48,7 +48,7 @@ public class itemSprite : MonoBehaviour
     }
 }
 
-public class itemInfo : MonoBehaviour
+public class itemInfo
 {
     private string name;
     private int price;
