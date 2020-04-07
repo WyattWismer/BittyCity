@@ -51,6 +51,11 @@ public class StructureControl : MonoBehaviour
         metrics.setNumSidewalks(metrics.getNumSidewalks() - 1);
     }
 
+    public List<Node> getSidewalks()
+    {
+        return sidewalkInfo.getStructures();
+    }
+
     public void addBuilding(int i, int j)
     {
         buildings.Add(new Node(i, j));
@@ -68,6 +73,22 @@ public class StructureControl : MonoBehaviour
         metrics.setNumBuildings(metrics.getNumBuildings() - 1);
     }
 
+    public List<Node> getBuildings()
+    {
+        return buildingInfo.getStructures();
+    }
+
+    public void Clean()
+    {
+        for (int i = 0; i < gridWidth; i++)
+        {
+            for (int j = 0; j< gridWidth; j++)
+            {
+                removeStructure(i, j);
+            }
+        }
+    }
+
     public void removeStructure(int i, int j)
     {
         if (grid[i, j] == 1)
@@ -77,6 +98,13 @@ public class StructureControl : MonoBehaviour
         else if (grid[i, j] == 2)
         {
             removeBuilding(i, j);
+        }
+        else
+        {
+            // transparent
+            sidewalkInfo.removeStructure(i, j);
+            buildingInfo.removeStructure(i, j);
+            grid[i, j] = 0;
         }
     }
 
@@ -107,22 +135,40 @@ public class StructureControl : MonoBehaviour
         return buildings.ElementAt(random.Next(buildings.Count));
     }
 
-    public Object createFakeSidewalk(int i, int j, bool block_spot = true)
+    public void createFakeSidewalk(int i, int j, bool block_spot = true)
     {
-        if (block_spot)
+        if (isStructure(i, j)) return; 
+        if (block_spot == false)
+        {
+            if (deadSpot != null)
+            {
+                restoreSpot();
+            }
+            deadSpot = new Node(i, j);
+        }
+        else
         {
             grid[i, j] = -1;
         }
-        return sidewalkInfo.createFakeStructure(i, j);
+        sidewalkInfo.addFakeStructure(i, j);
     }
 
-    public Object createFakeBuilding(int i, int j, bool block_spot = true)
+    public void createFakeBuilding(int i, int j, bool block_spot = true)
     {
-        if (block_spot)
+        if (isStructure(i, j)) return;
+        if (block_spot == false)
+        {
+            if (deadSpot != null)
+            {
+                restoreSpot();
+            }
+            deadSpot = new Node(i, j);
+        }
+        else
         {
             grid[i, j] = -1;
         }
-        return buildingInfo.createFakeStructure(i, j);
+        buildingInfo.addFakeStructure(i, j);
     }
 
     public void createDeadSpot(int i, int j)
@@ -176,7 +222,12 @@ public class StructureControl : MonoBehaviour
         removeSpot();
         int i = deadSpot.i;
         int j = deadSpot.j;
-        if (grid[i, j] == 1) // sidewalk
+        if (grid[i, j] == 0) // empty landscape
+        {
+            sidewalkInfo.removeStructure(i, j);
+            buildingInfo.removeStructure(i, j);
+        }
+        else if (grid[i, j] == 1) // sidewalk
         {
             sidewalkInfo.addStructure(i, j);
         }
@@ -354,6 +405,10 @@ public class Node : System.IComparable
         {
             throw new System.ArgumentException("Object is not a Node");
         }
+    }
+    public Node Copy()
+    {
+        return new Node(this.i, this.j);
     }
 }
 

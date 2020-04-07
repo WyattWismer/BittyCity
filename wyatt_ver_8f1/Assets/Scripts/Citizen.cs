@@ -31,7 +31,10 @@ public class Citizen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.Translate(new Vector3(5 * Time.deltaTime, 0, 0));
+        if (action == null)
+        {
+            Debug.Log("Bad");
+        }
         if(action.Update())
         {
             // action completed, get new action
@@ -160,6 +163,7 @@ public class MateAction : Action
     }
 }
 
+/*
 public class CreateSidewalkAction : Action
 {
     private Node destination;
@@ -215,6 +219,59 @@ public class CreateBuildingAction : Action
         return false;
     }
 }
+*/
+public class CreateSidewalkAction : Action
+{
+    private Node destination;
+    private float workRemaining;
+    private float workSpeed;
+
+    public CreateSidewalkAction(Citizen _parent, Node _destination) : base(_parent)
+    {
+        destination = _destination;
+        workSpeed = 75;
+        workRemaining = 100;
+        _parent.structureControl.createFakeSidewalk(destination.i, destination.j);
+    }
+
+    public override bool Update()
+    {
+        workRemaining -= workSpeed * Time.deltaTime;
+        if (workRemaining <= 0)
+        {
+            parent.structureControl.addSidewalk(destination.i, destination.j);
+            return true;
+        }
+        return false;
+    }
+}
+
+public class CreateBuildingAction : Action
+{
+    private Node destination;
+    private float workRemaining;
+    private float workSpeed;
+
+    public CreateBuildingAction(Citizen _parent, Node _destination) : base(_parent)
+    {
+        destination = _destination;
+        workSpeed = 25;
+        workRemaining = 100;
+        _parent.structureControl.createFakeBuilding(destination.i, destination.j);
+    }
+
+    public override bool Update()
+    {
+        workRemaining -= workSpeed * Time.deltaTime;
+        if (workRemaining <= 0)
+        {
+            parent.structureControl.addBuilding(destination.i, destination.j);
+            return true;
+        }
+        return false;
+    }
+}
+
 
 public class NavigationAction : Action
 {

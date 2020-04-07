@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CityMetricsUI : MonoBehaviour
 {
+    public Toggle displayMetricsToggle;
     public Text cityNameText;
     public Text timeRemainingText;
     public Text numCitizenText;
@@ -12,8 +13,8 @@ public class CityMetricsUI : MonoBehaviour
     public Text numBuildingText;
     public Text numPointsText;
 
-    private string cityName = "BittyCity"; // placeholder
-    private int timeRemaining = 100; // placeholder (seconds)
+    private string cityName;
+    private float timeRemaining; // measured in seconds
     private int numCitizens = 0;
     private int numSidewalks = 0;
     private int numBuildings = 0;
@@ -29,6 +30,11 @@ public class CityMetricsUI : MonoBehaviour
         displayNumSidewalks();
         displayNumBuildings();
         displayNumPoints();
+
+        // show/hide metrics
+        displayMetricsToggle.onValueChanged.AddListener(delegate {
+            this.gameObject.SetActive(displayMetricsToggle.isOn);
+        });
     }
 
     // Update is called once per frame
@@ -50,25 +56,26 @@ public class CityMetricsUI : MonoBehaviour
 
     public void displayCityName()
     {
-        cityNameText.text = cityName;
+        cityNameText.text = "Name: " + cityName;
     }
 
     // time remaining 
-    public int getTimeRemaining()
+    public float getTimeRemaining()
     {
         return timeRemaining;
     }
 
-    public void setTimeRemaining(int seconds)
+    public void setTimeRemaining(float seconds)
     {
         timeRemaining = seconds;
+        displayTimeRemaining();
     }
 
     public void displayTimeRemaining()
     {
-        int minutes = timeRemaining / 60;
-        int seconds = timeRemaining - minutes * 60;
-        timeRemainingText.text = zeroBufferedInt(minutes) + ":" + zeroBufferedInt(seconds);
+        int minutes = (int) timeRemaining / 60;
+        int seconds = (int) timeRemaining - minutes * 60;
+        timeRemainingText.text = "Time: " + zeroBufferedInt(minutes) + ":" + zeroBufferedInt(seconds);
     }
 
     public string zeroBufferedInt(int x)
@@ -95,7 +102,7 @@ public class CityMetricsUI : MonoBehaviour
 
     private void displayNumCitizens()
     {
-        numCitizenText.text = "# Citizens: " + numCitizens.ToString();
+        numCitizenText.text = "Citizens: " + numCitizens.ToString();
     }
 
     // sidewalk methods
@@ -112,7 +119,7 @@ public class CityMetricsUI : MonoBehaviour
 
     private void displayNumSidewalks()
     {
-        numSidewalkText.text = "# Sidewalks: " + numSidewalks.ToString();
+        numSidewalkText.text = "Sidewalks: " + numSidewalks.ToString();
     }
     
     // building methods
@@ -129,7 +136,7 @@ public class CityMetricsUI : MonoBehaviour
 
     private void displayNumBuildings()
     {
-        numBuildingText.text = "# Buildings: " + numBuildings.ToString();
+        numBuildingText.text = "Buildings: " + numBuildings.ToString();
     }
 
     // point methods
@@ -146,6 +153,6 @@ public class CityMetricsUI : MonoBehaviour
 
     private void displayNumPoints()
     {
-        numPointsText.text = "# Points: " + numPoints.ToString();
+        numPointsText.text = "Points: " + numPoints.ToString();
     }
 }

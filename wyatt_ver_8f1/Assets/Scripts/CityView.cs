@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CityView : MonoBehaviour
 {
+    public CityControl cityControl;
     public Collider landscapeCollider;
     public StructureControl structureControl;
     public ItemApplication itemApplication;
+    
     private bool mouseDown = false;
+    private CityState saveForTesting;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +46,16 @@ public class CityView : MonoBehaviour
         {
             if (itemApplication != null) itemApplication.cleanup();
             itemApplication = new BombItemApplication(structureControl);
+        }
+
+        if (Input.GetKey(KeyCode.K)) // test saving game
+        {
+            saveForTesting = cityControl.SaveCity();
+        }
+
+        if (Input.GetKey(KeyCode.L)) // test loading game
+        {
+            cityControl.LoadCity(saveForTesting);
         }
 
         if (itemApplication != null)
@@ -110,7 +123,6 @@ public class BombItemApplication : ItemApplication
 
 public abstract class StructureItemApplication : ItemApplication
 {
-    protected GameObject structure;
     public StructureItemApplication(StructureControl _structureControl) : base(_structureControl)
     {
     }
@@ -122,14 +134,9 @@ public abstract class StructureItemApplication : ItemApplication
 
     public override void cleanup()
     {
-        if (structure != null)
-        {
-            structureControl.destroyObject(structure);
-        }
+        structureControl.restoreSpot();
     }
 }
-
-
 
 public class SidewalkItemApplication : StructureItemApplication
 {
@@ -139,14 +146,7 @@ public class SidewalkItemApplication : StructureItemApplication
 
     public override void draw(int i, int j)
     {
-        if (structure == null)
-        {
-            structure = (GameObject)structureControl.createFakeSidewalk(i, j, false);
-        }
-        else
-        {
-            structure.transform.position = new Vector3(0.5f + i, 0.05f, 0.5f + j);
-        }
+        structureControl.createFakeSidewalk(i, j, false);
     }
 
     public override void useItem(int i, int j)
@@ -164,14 +164,7 @@ public class BuildingItemApplication : StructureItemApplication
 
     public override void draw(int i, int j)
     {
-        if (structure == null)
-        {
-            structure = (GameObject)structureControl.createFakeBuilding(i, j, false);
-        }
-        else
-        {
-            structure.transform.position = new Vector3(0.5f + i, 0.5f, 0.5f + j);
-        }
+        structureControl.createFakeBuilding(i, j, false);
     }
 
     public override void useItem(int i, int j)

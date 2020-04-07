@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b21c0ec6b35f9419188b4a7f09c29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cityControl: {fileID: 320454966}
   landscapeCollider: {fileID: 1763850556}
   structureControl: {fileID: 1725078144}
 --- !u!4 &83816167
@@ -195,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e039e913372fb49839c762d9c0d5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  metrics: {fileID: 1795851084}
   structureControl: {fileID: 1725078144}
   citizenControl: {fileID: 640030108}
 --- !u!4 &320454967
@@ -1543,6 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413a1d9a4645e5845b6222617e03de9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayMetricsToggle: {fileID: 1243430481}
   cityNameText: {fileID: 1078163948}
   timeRemainingText: {fileID: 1441707191}
   numCitizenText: {fileID: 435714335}
