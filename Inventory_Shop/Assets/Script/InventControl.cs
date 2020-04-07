@@ -1,18 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class NewBehaviourScript : MonoBehaviour
+﻿
+public class InventControl
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	private InventContent inventory;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void addItem(Item i)
+	{
+		inventory.addItem(i);
+	}
+
+	public void removeItem(Item i)
+	{
+		inventory.removeItem(i);
+	}
+
+	public void useItem(Item i)
+	{
+		string itemName = i.getName();
+		switch (itemName)
+        {
+        	case "0":{
+
+        	}
+        	case "1":{
+
+        	}
+        }
+		inventory.removeItem(i);
+	}
+
+	public void showIventory()
+	{
+
+	}
+
+	public void hideInventory()
+	{
+
+	}
+
+	public bool isinventoryHidden()
+	{
+		return true;
+	}
 }
