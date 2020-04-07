@@ -155,4 +155,21 @@ public class CityMetricsUI : MonoBehaviour
     {
         numPointsText.text = "Points: " + numPoints.ToString();
     }
+
+    public void GameOver()
+    {
+        displayMetricsToggle.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        numCitizens = 0;
+        numSidewalks = 0;
+        numBuildings = 0;
+        numPoints = 0;
+
+        displayMetricsToggle.gameObject.SetActive(true);
+        this.gameObject.SetActive(displayMetricsToggle.isOn);
+    }
 }

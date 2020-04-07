@@ -82,11 +82,38 @@ public class StructureControl : MonoBehaviour
     {
         for (int i = 0; i < gridWidth; i++)
         {
-            for (int j = 0; j< gridWidth; j++)
+            for (int j = 0; j < gridWidth; j++)
             {
                 removeStructure(i, j);
             }
         }
+    }
+
+    private void removeTransparent()
+    {
+        for (int i = 0; i < gridWidth; i++)
+        {
+            for (int j = 0; j < gridWidth; j++)
+            {
+                if (grid[i, j] == -1)
+                {
+                    removeStructure(i, j);
+                }
+            }
+        }
+    }
+
+    public void GameOver()
+    {
+        removeTransparent();
+        sidewalkInfo.GameOver(true);
+        buildingInfo.GameOver(false);
+    }
+
+    public void Reset()
+    {
+        sidewalkInfo.Reset();
+        buildingInfo.Reset();
     }
 
     public void removeStructure(int i, int j)

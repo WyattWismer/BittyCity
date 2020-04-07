@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using static System.Math;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,15 @@ public class Citizen : MonoBehaviour
     public CitizenControl citizenControl;
     public Node location;
     public int actionsLeftUntilMatingAllowed;
+    public bool isZombie;
+    public float zombieLife;
+    public float zombieLifeLimit;
 
     private Action action;
+    private Color originalColor;
+    private Color zombieColor;
+
+    
     
 
     public void setup(CitizenControl _citizenControl, StructureControl _structureControl, Node _location)
@@ -20,6 +28,7 @@ public class Citizen : MonoBehaviour
         location = _location;
         action = ActionFactory.getAction(this);
         actionsLeftUntilMatingAllowed = 0;
+        isZombie = false;
     }
 
     // Start is called before the first frame update
@@ -31,11 +40,19 @@ public class Citizen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (action == null)
+        if (isZombie)
         {
-            Debug.Log("Bad");
+            zombieLife += Time.deltaTime;
+            Color lerp = Color.LerpUnclamped(originalColor, zombieColor, Min(zombieLife*12, 1f));
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", lerp);
+            if (zombieLife >= zombieLifeLimit)
+            {
+                citizenControl.killZombie(this);
+            }
         }
-        if(action.Update())
+
+
+        if (action.Update())
         {
             // action completed, get new action
             action = ActionFactory.getAction(this);
@@ -45,6 +62,29 @@ public class Citizen : MonoBehaviour
             }
         }
     }
+
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if (isZombie)
+        {
+            Citizen citizen = other.gameObject.GetComponent<Citizen>();
+            if (citizen != null && !citizen.isZombie)
+            {
+                citizen.becomeZombie();
+            }
+        }
+    }
+
+    public void becomeZombie()
+    {
+        isZombie = true;
+        zombieLife = 0;
+        zombieLifeLimit = 3;
+        originalColor = gameObject.GetComponent<Renderer>().material.GetColor("_Color");
+        zombieColor = new Color(1f - originalColor.r, 1f - originalColor.g, 1f - originalColor.b, originalColor.a);
+    }
+
 }
 
 public static class ActionFactory
@@ -54,7 +94,7 @@ public static class ActionFactory
     {
         while (true)
         {
-            int action_choice = random.Next(13);
+            int action_choice = random.Next(16);
             switch (action_choice)
             {
                 case 0:
@@ -73,20 +113,32 @@ public static class ActionFactory
                 case 3:
                 case 4:
                 case 5:
+                case 6:
+                case 7:
+                    if (_parent.isZombie) continue;
                     Node sidewalk_dst = tryToGetDesination(_parent);
                     if (sidewalk_dst == null) continue;
                     return new CreateSidewalkAction(_parent, sidewalk_dst);
-                case 6:
+                case 8:
+                    if (_parent.isZombie) continue;
                     Node building_dst = tryToGetDesination(_parent);
                     if (building_dst == null) continue;
                     return new CreateBuildingAction(_parent, building_dst);
-                case 7:
-                case 8:
                 case 9:
+                    if (_parent.isZombie) continue; // already a zombie
+                    int chance = random.Next(300);
+                    if (chance == 0)
+                    {
+                        _parent.becomeZombie();
+                    }
+                    continue;
                 case 10:
                 case 11:
                 case 12:
-                    //Debug.Log("Trying to mate");
+                case 13:
+                case 14:
+                case 15:
+                    if (_parent.isZombie) continue;
                     if (_parent.actionsLeftUntilMatingAllowed > 0) continue; // must do more work before mating
                     if (!citizenInBuilding(_parent)) continue;
                     bool mate_started = _parent.citizenControl.tryToMate(_parent.location.i, _parent.location.j);
@@ -163,63 +215,6 @@ public class MateAction : Action
     }
 }
 
-/*
-public class CreateSidewalkAction : Action
-{
-    private Node destination;
-    private float workRemaining;
-    private float workSpeed;
-    private Object fakeSidewalk;
-
-    public CreateSidewalkAction(Citizen _parent, Node _destination) : base(_parent)
-    {
-        destination = _destination;
-        workSpeed = 75;
-        workRemaining = 100;
-        fakeSidewalk = _parent.structureControl.createFakeSidewalk(destination.i, destination.j);
-    }
-
-    public override bool Update()
-    {
-        workRemaining -= workSpeed * Time.deltaTime;
-        if(workRemaining <= 0)
-        {
-            parent.structureControl.addSidewalk(destination.i, destination.j);
-            parent.structureControl.destroyObject(fakeSidewalk);
-            return true;
-        }
-        return false;
-    }
-}
-
-public class CreateBuildingAction : Action
-{
-    private Node destination;
-    private float workRemaining;
-    private float workSpeed;
-    private Object fakeBuilding;
-
-    public CreateBuildingAction(Citizen _parent, Node _destination) : base(_parent)
-    {
-        destination = _destination;
-        workSpeed = 25;
-        workRemaining = 100;
-        fakeBuilding = _parent.structureControl.createFakeBuilding(destination.i, destination.j);
-    }
-
-    public override bool Update()
-    {
-        workRemaining -= workSpeed * Time.deltaTime;
-        if (workRemaining <= 0)
-        {
-            parent.structureControl.addBuilding(destination.i, destination.j);
-            parent.structureControl.destroyObject(fakeBuilding);
-            return true;
-        }
-        return false;
-    }
-}
-*/
 public class CreateSidewalkAction : Action
 {
     private Node destination;
@@ -278,13 +273,6 @@ public class NavigationAction : Action
     private Path path;
     private int path_index;
 
-    /*
-    protected NavigationAction(Citizen _parent, Node _destination) : base(_parent)
-    {
-        path = parent.structureControl.shortest_path(_parent.location, _destination);
-        path_index = 0;
-    }
-    */
     public NavigationAction(Citizen _parent, Path _path) : base(_parent)
     {
         path = _path;
@@ -321,20 +309,4 @@ public class NavigationAction : Action
     }
 }
 
-/*
-public class walkToSidewalkAction : NavigationAction
-{
-    public walkToSidewalkAction(Citizen _parent) : base(_parent, _parent.structureControl.getRandomSidewalk())
-    {
-
-    }
-}
-
-public class walkToBuildingAction : NavigationAction
-{
-    public walkToBuildingAction(Citizen _parent) : base(_parent, _parent.structureControl.getRandomBuilding())
-    {
-    }
-}
-*/
 

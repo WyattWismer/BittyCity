@@ -8,7 +8,7 @@ public class StructuresInfo : MonoBehaviour
     public GameObject transparentStructurePrefab;
     public GameObject deadStructurePrefab;
     public float heightOffset;
-    private Object[,] grid = new Object[25, 25];
+    private GameObject[,] grid = new GameObject[25, 25];
 
 
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class StructuresInfo : MonoBehaviour
 
     }
 
-    private Object create(int i, int j, GameObject prefab)
+    private GameObject create(int i, int j, GameObject prefab)
     {
         if (grid[i, j] != null) removeStructure(i, j);
         return Instantiate(prefab, new Vector3(0.5f + i, heightOffset, 0.5f + j), Quaternion.identity);
@@ -64,4 +64,33 @@ public class StructuresInfo : MonoBehaviour
         }
         return result;
     }
+
+    public void GameOver(bool isSidewalk)
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            for (int j = 0; j < 25; j++)
+            {
+                if (grid[i, j] != null)
+                {
+                   // grid[i, j].AddComponent<MakeObjectFlyAway>();
+                    if (isSidewalk)
+                    {
+                        grid[i, j].AddComponent<MakeSidewalkFlyAway>();
+                    }
+                    else
+                    {
+                        grid[i, j].AddComponent<MakeBuildingFlyAway>();
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void Reset()
+    {
+
+    }
+
 }
