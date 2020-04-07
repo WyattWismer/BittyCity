@@ -13,7 +13,8 @@ public class ItemHolder
 
 	public void updateShopItem(string name, int price, string description)
 	{
-        
+        Item item = new Item(name, price, description);
+        this.items.Add(item, item.getPrice);
 	}
 
 
