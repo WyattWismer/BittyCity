@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemHolder
 {
-    protected List<Item> items;
+   protected List<Item> items;
 
 
    public ItemHolder()
@@ -19,8 +19,9 @@ public class ItemHolder
     public Dictionary<Item, int> generateItemPrices()
 	{
         Dictionary<Item, int> itemPrices = new Dictionary<Item, int>();
-        itemPrices.Add(new Item(1,"a", 1, "item a"), 1);
-        itemPrices.Add(new Item(2,"b", 2, "item b"), 2);
+        itemPrices.Add(new Item(1,"building", 100, "this is a building"), 100);
+        itemPrices.Add(new Item(2,"sidewalk", 20, "this is a sidewalk"),20);
+        itemPrices.Add(new Item(3, "bomb", 200, "this is a bomb"),200);
         return itemPrices;
 	}
 }

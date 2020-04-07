@@ -838,9 +838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSelected: {fileID: 0}
-  shopVisiblity: {fileID: 0}
-  shop: {fileID: 0}
-  itemNum: 0
+  shop: {fileID: 1205527729}
+  itemText: {fileID: 0}
 --- !u!1 &1522390423
 GameObject:
   m_ObjectHideFlags: 0
