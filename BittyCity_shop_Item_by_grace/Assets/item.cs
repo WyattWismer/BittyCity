@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class item : MonoBehaviour
+public class Item : MonoBehaviour
 {
     private itemSprite sprite;
     private itemInfo info;
 
-    public item(string name, string description)
+    public Item(string name, int price, string description)
 	{
-        this.info = new itemInfo(name, description);
+        this.info = new itemInfo(name, price, description);
         this.sprite = new itemSprite();
 	}
 
@@ -27,17 +27,12 @@ public class item : MonoBehaviour
 	{
         this.sprite.display(x, y);
 	}
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int getPrice()
+	{
+        return this.info.getPrice();
+	}
+   
 }
 
 public class itemSprite : MonoBehaviour
@@ -56,11 +51,13 @@ public class itemSprite : MonoBehaviour
 public class itemInfo : MonoBehaviour
 {
     private string name;
+    private int price;
     private string description;
 
-    public itemInfo(string name, string description)
+    public itemInfo(string name, int price, string description)
     {
         this.name = name;
+        this.price = price;
         this.description = description;
     }
 
@@ -69,10 +66,17 @@ public class itemInfo : MonoBehaviour
         return this.name;
     }
 
+    public int getPrice()
+	{
+        return this.price;
+	}
+
     public string getDescription()
     {
         return this.description;
     }
+
+   
 
 }
 
