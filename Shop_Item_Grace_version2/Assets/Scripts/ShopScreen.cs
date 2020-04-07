@@ -1,36 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEditor;
-
-
+using UnityEngine.EventSystems;
 public class ShopScreen : ItemDisplayer
 {
 
 	public GameObject itemSelected;
+	public GameObject shopVisiblity;
+	public Transform shop;
+	public int itemNum;
 
-	public void displayItems(Dictionary<Item, int> itemPrices)
+	public static void displayItems(Dictionary<Item, int> itemPrices)
 	{
-		foreach (Item item in itemPrices.Keys)
-		{
-
-		}
+		
 	}
 
 	public void acceptItemPurchase()
 	{
-
 		deselectItem();
 	}
 
-	
 
-	public void Update()
+	public void OnDeselect()
 	{
-		if (Selection.Contains(itemSelected))
-			Debug.Log("I'm selected!");
+		Debug.Log("deselected");
+	}
+	public void Start()
+	{
+		shop = transform.Find("Shop");
+		itemSelected = shop.Find("item").gameObject;
+	
 	}
 
+    public void Update()
+	{
+        
+	}
 }

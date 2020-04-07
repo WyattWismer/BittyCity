@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class ShopControl : MonoBehaviour
 {
-    private ShopScreen shopScreen;
-    private ShopConents shopConents;
-   
+	public static ShopScreen shopScreen = new ShopScreen();
+    public static ShopConents shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
+    public static ItemHolder itemHolder = new ItemHolder();
 
-    public ShopControl()
-	{
-        ItemHolder itemHolder = new ItemHolder();
-        shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
-        shopScreen = new ShopScreen();
-	}
+    public static Dictionary<Item, int> itemPrices = shopConents.getItemPrices(); 
+
+    
     public static void loadShopScreen()
 	{
-
+        ShopScreen.displayItems(itemPrices);
     }
 
+   
 
     public void purchaseItem()
 	{
@@ -44,7 +42,6 @@ public class ShopControl : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
     {
-        Debug.Log(shopConents.getItemPrices().Count);
 	}
 
     // Update is called once per frame

@@ -4,53 +4,39 @@ using UnityEngine;
 
 public class Item
 {
-    public ItemInfo info;
 
-    public Item(string name, int price, string description)
-	{
-        this.info = new ItemInfo(name, price, description);
-	}
+    protected string name;
+    protected string description;
+    protected int price;
+    protected int itemID;
 
-   
-}
-
-public class ItemInfo
-{
-    private string name;
-    private int price;
-    private string description;
-
-    public ItemInfo(string name, int price, string description){
+    public Item(int itemID, string name, int price, string description)
+    {
         this.name = name;
-        this.description = description;
         this.price = price;
+        this.itemID = itemID;
+        this.description = description;
+    }
+
+    public int getItemID()
+    {
+        return this.itemID;
     }
 
     public string getName()
-	{
+    {
         return this.name;
-	}
+
+    }
 
     public string getDescription()
-	{
+    {
         return this.description;
-	}
+    }
+
     public int getPrice()
-	{
+    {
         return this.price;
-	}
-}
-
-public class ItemSprite
-{
-    public ItemSprite()
-    {
-
     }
 
-    public void display(int x, int y)
-    {
-
-    }
 }
-
