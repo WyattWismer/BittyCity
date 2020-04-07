@@ -54,6 +54,7 @@ public class CitizenControl : MonoBehaviour
         {
             Destroy(citizen);
         }
+        metrics.setNumCitizens(0);
     }
 
     // returns false if this isn't a valid mating location
