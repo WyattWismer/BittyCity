@@ -17,6 +17,7 @@ public class GameSaveManager : MonoBehaviour
 
     //public Keybindings keybindings;
 
+    /*
     void Awake()
     {
         if (instance == null)
@@ -29,12 +30,12 @@ public class GameSaveManager : MonoBehaviour
         }
         //DontDestroyOnLoad(this);
     }
+    */
 
 
 
-    public bool IsSaveFile()
+    public bool hasSaveFile()
     {
-
         return Directory.Exists(Application.persistentDataPath + "/save_games");
     }
 
@@ -44,17 +45,20 @@ public class GameSaveManager : MonoBehaviour
     {
         cityState = cityControl.SaveCity();
 
-        if (!IsSaveFile())
+        if (!hasSaveFile())
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/save_games");
         }
 
+        /*
         if (!Directory.Exists(Application.persistentDataPath + "/save_games/" + cityState.cityName));
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/save_games/" + cityState.cityName);
         }
+        */
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/save_games/" + cityState.cityName + "/" + cityState.cityName + ".json");
+        //FileStream file = File.Create(Application.persistentDataPath + "/save_games/" + cityState.cityName + "/" + cityState.cityName + ".json");
+        FileStream file = File.Create(Application.persistentDataPath + "/save_games/" + cityState.cityName + ".json");
         var json = JsonUtility.ToJson(cityState);
         bf.Serialize(file, json);
         file.Close();
@@ -69,14 +73,16 @@ public class GameSaveManager : MonoBehaviour
         {
             print(file);
         }*/
+        /*
         if (!Directory.Exists(Application.persistentDataPath + "/save_games/" + cityState.cityName)) ;
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/save_games/" + cityState.cityName);
         }
+        */
         BinaryFormatter bf = new BinaryFormatter();
-        if (File.Exists(Application.persistentDataPath + "/save_games/" + cityState.cityName + "/" + cityState.cityName + ".json")) 
+        if (File.Exists(Application.persistentDataPath + "/save_games/"  + cityState.cityName + ".json")) 
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/save_games/" + cityState.cityName + "/" + cityState.cityName + ".json", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/save_games/" + cityState.cityName + ".json", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), cityState);
             file.Close();
         }
