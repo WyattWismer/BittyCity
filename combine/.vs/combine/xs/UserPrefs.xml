@@ -1,0 +1,34 @@
+﻿<Properties StartupConfiguration="{C2F94561-3079-4FC6-B3AB-5C4F3855E394}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CityView.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ShopControl.cs" Line="7" Column="12" />
+      <File FileName="Assets/Scripts/ShopScreen.cs" Line="20" Column="38" />
+      <File FileName="Assets/Scripts/InventControl.cs" Line="57" Column="28" />
+      <File FileName="Assets/Scripts/InventUI.cs" Line="62" Column="44" />
+      <File FileName="Assets/Scripts/CityView.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="combine" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="CityView.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a42679b6-af7f-4d41-84c8-1bcdf048d57c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

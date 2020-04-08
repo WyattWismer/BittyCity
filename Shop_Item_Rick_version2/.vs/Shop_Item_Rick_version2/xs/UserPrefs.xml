@@ -1,7 +1,10 @@
 ﻿<Properties StartupConfiguration="{CFEE8D18-E5CF-5F23-0582-4522E5F7F992}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InventControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ShopControl.cs">
     <Files>
-      <File FileName="Assets/Scripts/InventControl.cs" Line="67" Column="5" />
+      <File FileName="Assets/Scripts/InventControl.cs" Line="68" Column="11" />
+      <File FileName="Assets/Scripts/ShopContents.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ShopControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ShopScreen.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,7 +12,7 @@
           <Node name="Shop_Item_Rick_version2" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="InventControl.cs" selected="True" />
+                <Node name="ShopControl.cs" selected="True" />
               </Node>
             </Node>
           </Node>
