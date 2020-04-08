@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 public class ShopScreen : ItemDisplayer
 {
@@ -19,19 +20,18 @@ public class ShopScreen : ItemDisplayer
 		userWallet.text = "Wallet: $" + amount.ToString();
 	}
 
-	public void acceptItemPurchase()
-	{
-		
-	}
-
+	public static void displayInsufficentFunds()
+    {
+		SceneManager.LoadScene("alert");
+    }
   
 	public void Start()
 	{
+		displayWallet(ShopControl.getCurrency());
 	}
 
     public void Update()
 	{
-		acceptItemPurchase();
 	}
 
 }
