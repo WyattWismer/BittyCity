@@ -27,7 +27,6 @@ public class ShopScreen : ItemDisplayer
   
 	public void Start()
 	{
-		displayWallet(100);
 	}
 
     public void Update()

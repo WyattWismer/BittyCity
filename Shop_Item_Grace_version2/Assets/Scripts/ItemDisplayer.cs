@@ -5,40 +5,22 @@ using UnityEngine.EventSystems;
 
 public class ItemDisplayer : MonoBehaviour
 {
-    protected string selectedItem;
+    public static string selectedItem;
     private GameObject item;
-
+    private bool selected = false;
    
-    public void selectItem()
+    public void selectItem(string itemName)
     {
-        //Get the GameObject that is being selected
-		item = EventSystem.current.currentSelectedGameObject;
-		if (item != null)
+		if (selectedItem == itemName)
 		{
-            this.selectedItem = item.name;
-            Debug.Log("Selected " + this.selectedItem);
-          }
-    }
-
-    public void deselectItem(string itemName)
-	{
-        //if item is being selected, then deselect
-		if (selectedItem==itemName)
+            selectedItem = null;
+		}
+		else
 		{
-            Debug.Log("Deselected "+ itemName);
-            EventSystem.current.SetSelectedGameObject(null);
-            this.selectedItem = null;
+           selectedItem = itemName;
         }
-    }
-
-    public string getSelectedItem()
-	{
-        return selectedItem;
-	}
-    public void Start()
-    {
+        Debug.Log(selectedItem);
     }
 
 
-     
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShopControl : MonoBehaviour
 {
 	public static ShopScreen shopScreen = new ShopScreen();
-    public static ShopConents shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
     public static ItemHolder itemHolder = new ItemHolder();
+    public static ShopConents shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
 
     public static Dictionary<Item, int> itemPrices = shopConents.getItemPrices(); 
 
@@ -19,7 +19,8 @@ public class ShopControl : MonoBehaviour
 
     public void purchaseItem()
 	{
-        string itemInfo = shopScreen.getSelectedItem();
+        string itemInfo = ShopScreen.selectedItem;
+        Debug.Log(itemInfo);
         if (itemInfo == null) return;
         Item item = itemHolder.itemConverter(itemInfo);
         if (checkPurchase(item)){
@@ -27,7 +28,8 @@ public class ShopControl : MonoBehaviour
             //Update usercurrency
 			shopConents.changeCurrency(item);
             ShopScreen.displayWallet(shopConents.getCurrency());
-            ItemControl.transferToInventory(item);
+            Debug.Log("Success");
+            //ItemControl.transferToInventory(item);
         }
         return;
     }
