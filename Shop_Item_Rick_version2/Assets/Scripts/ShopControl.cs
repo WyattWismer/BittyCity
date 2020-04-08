@@ -24,14 +24,17 @@ public class ShopControl : MonoBehaviour
         if (itemInfo == null) return;
         Item item = itemHolder.itemConverter(itemInfo);
         if (checkPurchase(item)){
-            shopScreen.acceptItemPurchase();
             //Update usercurrency
 			shopConents.changeCurrency(item);
             ShopScreen.displayWallet(shopConents.getCurrency());
             Debug.Log("Success");
-            //ItemControl.transferToInventory(item);
+			ItemControl.transferToInventory(item);
+		}
+        else
+		{
+            ShopScreen.displayInsufficentFunds();
+            return;
         }
-        return;
     }
 
     private bool checkPurchase(Item item) 
@@ -43,14 +46,10 @@ public class ShopControl : MonoBehaviour
 		}
         return false;
 	}
-	// Start is called before the first frame update
-	void Awake()
-    {
+    public static int getCurrency()
+	{
+        return shopConents.getCurrency();
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+	
 }

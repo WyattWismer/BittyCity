@@ -12,7 +12,7 @@ public class ShopScreen : ItemDisplayer
 
     public static void displayItems()
 	{
-
+		SceneManager.LoadScene("SampleScene");
 	}
 	public static void displayWallet(int amount)
 	{

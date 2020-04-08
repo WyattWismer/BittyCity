@@ -28,8 +28,8 @@ public class ShopControl : MonoBehaviour
 			shopConents.changeCurrency(item);
             ShopScreen.displayWallet(shopConents.getCurrency());
             Debug.Log("Success");
-            //ItemControl.transferToInventory(item);
-        }
+			ItemControl.transferToInventory(item);
+		}
         else
 		{
             ShopScreen.displayInsufficentFunds();
@@ -51,14 +51,5 @@ public class ShopControl : MonoBehaviour
         return shopConents.getCurrency();
 	}
 
-	// Start is called before the first frame update
-	void Awake()
-    {
-	}
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+	
 }

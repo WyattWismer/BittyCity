@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class InventUI : ItemDisplayer
 {
-    public float heightOffset;
-    public GameObject bagItem1;
-    public GameObject bagItem2;
-    public GameObject bagItem3;
-    public Transform inventory;
+    public static GameObject bagItem1;
+    public static GameObject bagItem2;
+    public static GameObject bagItem3;
+    public static Transform inventoryPanel;
 
-    private List<Item> appliedItems;
-    
+    public InventUI(GameObject bagItem1_new, GameObject bagItem2_new, GameObject bagItem3_new, Transform inventoryPanel_new)
+    {
+        bagItem1 = bagItem1_new;
+        bagItem2 = bagItem2_new;
+        bagItem3 = bagItem3_new;
+        inventoryPanel = inventoryPanel_new;
+    } 
     public void displayItems(Dictionary<int, int> inventoryDict)
     {
         //change sence to inventory
@@ -26,15 +30,22 @@ public class InventUI : ItemDisplayer
             {
                 if (i == 1)
                 {
-                    GameObject obj = Instantiate(bagItem1, inventory);
+                    
+                    GameObject obj = Instantiate(bagItem1, inventoryPanel);
+                    GameObject.Find("Canvas/InventoryPanel/RedBackground/building_Inven(Clone)/Amount").GetComponent<Text>().text = "Amount:" + inventoryDict[i];
+
                 }
                 else if (i == 2)
                 {
-                    GameObject obj = Instantiate(bagItem2, inventory);
+                    GameObject obj = Instantiate(bagItem2, inventoryPanel);
+                    GameObject.Find("Canvas/InventoryPanel/RedBackground/sidewalk_Inven(Clone)/Amount").GetComponent<Text>().text = "Amount:" + inventoryDict[i];
+
                 }
                 else if (i == 3)
                 {
-                    GameObject obj = Instantiate(bagItem3, inventory);
+                    GameObject obj = Instantiate(bagItem3, inventoryPanel);
+                    GameObject.Find("Canvas/InventoryPanel/RedBackground/bomb_Inven(Clone)/Amount").GetComponent<Text>().text = "Amount:" + inventoryDict[i];
+
                 }
             }
         }
@@ -52,26 +63,5 @@ public class InventUI : ItemDisplayer
         SceneManager.LoadScene("ApplySucc");
     }
 
-    public void applyItems(List<Item> appliedItems)
-    {
-        foreach (Item item in appliedItems)
-        {
-            InventControl.useItem();
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        displayItems(InventControl.inventory.getInventoryDict());
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 

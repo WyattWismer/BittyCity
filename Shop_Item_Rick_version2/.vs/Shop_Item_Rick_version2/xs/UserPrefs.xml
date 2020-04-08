@@ -1,30 +1,25 @@
 ﻿<Properties StartupConfiguration="{CFEE8D18-E5CF-5F23-0582-4522E5F7F992}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InventUI.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ItemHolder.cs">
     <Files>
-      <File FileName="Assets/Scripts/InventContent.cs" Line="38" Column="5" NotebookId="1" />
-      <File FileName="Assets/Scripts/InventUI.cs" Line="20" Column="17" NotebookId="1" />
-      <File FileName="Assets/Scripts/InventControl.cs" Line="13" Column="29" NotebookId="1" />
-      <File FileName="Assets/Scripts/ShopControl.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets/Scripts/InventContent.cs" Line="10" Column="23" NotebookId="1" />
+      <File FileName="Assets/Scripts/InventUI.cs" Line="14" Column="120" NotebookId="1" />
+      <File FileName="Assets/Scripts/InventControl.cs" Line="23" Column="3" NotebookId="1" />
+      <File FileName="Assets/Scripts/ItemHolder.cs" Line="41" Column="30" NotebookId="1" />
     </Files>
-    <FloatingWindows>
-      <FloatingWindow WindowId="1" X="376" Y="44" Width="820" Height="973">
-        <Files>
-          <File FileName="Assets/Scripts/ShopContents.cs" Line="1" Column="1" />
-          <File FileName="Assets/Scripts/ItemHolder.cs" Line="21" Column="73" />
-        </Files>
-      </FloatingWindow>
-    </FloatingWindows>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Shop_Item_Rick_version2" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="InventUI.cs" selected="True" />
+                <Node name="ItemHolder.cs" selected="True" />
               </Node>
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

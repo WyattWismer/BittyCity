@@ -37,6 +37,19 @@ public class ItemHolder
 		}
         return null;
 	}
-	
+
+    public Item itemConverter_inven(string itemInfo)
+    {
+        string itemName = itemInfo;
+        Debug.Log(itemName);
+        foreach (Item item in itemPrices.Keys)
+        {
+            if (item.getName() == itemName)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
 }
 

@@ -34,10 +34,4 @@ public class InventContent
     {
 		return inventory;
     }
-
-    static void Main(string[] args)
-    {
-		InventContent inventory = new InventContent();
-		Console.WriteLine(inventory.getItemAmounts(new Item(1, "building", 100, "this is a building")).ToString());
-    }
 }

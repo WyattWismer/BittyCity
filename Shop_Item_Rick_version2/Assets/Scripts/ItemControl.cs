@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemControl : MonoBehaviour
 {
-
+    //public static inventoryControl inventCtrl = new InventControl();
     public ItemControl()
 	{
 
@@ -12,7 +12,7 @@ public class ItemControl : MonoBehaviour
 
     public static void transferToInventory(Item item)
 	{
-
+        //inventCtrl.addItem(item);
 	}
 
     public void useItem(Item item)
@@ -22,7 +22,7 @@ public class ItemControl : MonoBehaviour
 
     public void cancelUseItem()
 	{
-
+        
 	}
 
     public void itemUsed()
@@ -39,15 +39,6 @@ public class ItemControl : MonoBehaviour
 	{
 
 	}
-    // Start is called before the first frame update
-    void Start()
-    {
+   
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
