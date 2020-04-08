@@ -22,5 +22,5 @@ public class ItemDisplayer : MonoBehaviour
         Debug.Log(selectedItem);
     }
 
-
+    
 }
