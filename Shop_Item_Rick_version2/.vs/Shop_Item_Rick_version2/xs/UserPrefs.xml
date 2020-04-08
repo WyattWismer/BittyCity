@@ -1,9 +1,7 @@
 ﻿<Properties StartupConfiguration="{CFEE8D18-E5CF-5F23-0582-4522E5F7F992}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InventControl.cs">
     <Files>
-      <File FileName="Assets/Scripts/InventContent.cs" Line="29" Column="27" />
-      <File FileName="Assets/Scripts/InventUI.cs" Line="57" Column="6" />
-      <File FileName="Assets/Scripts/InventControl.cs" Line="34" Column="4" />
+      <File FileName="Assets/Scripts/InventControl.cs" Line="67" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemControl : MonoBehaviour
 {
-    //public static inventoryControl inventCtrl = new InventControl();
+    public static InventControl inventCtrl = new InventControl();
+
     public ItemControl()
 	{
 
@@ -12,20 +13,10 @@ public class ItemControl : MonoBehaviour
 
     public static void transferToInventory(Item item)
 	{
-        //inventCtrl.addItem(item);
+        inventCtrl.addItem(item);
 	}
 
     public void useItem(Item item)
-	{
-
-	}
-
-    public void cancelUseItem()
-	{
-        
-	}
-
-    public void itemUsed()
 	{
 
 	}
@@ -35,10 +26,11 @@ public class ItemControl : MonoBehaviour
         ShopControl.loadShopScreen();
 	}
 
-    public void toggleInventory()
+    public void loadInventory()
 	{
+        inventCtrl.showInventory();
 
-	}
+    }
    
         
 }

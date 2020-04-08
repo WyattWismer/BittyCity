@@ -6,7 +6,7 @@ public class ShopControl : MonoBehaviour
 {
 	public static ShopScreen shopScreen = new ShopScreen();
     public static ItemHolder itemHolder = new ItemHolder();
-    public static ShopConents shopConents = new ShopConents(itemHolder.generateItemPrices(), 100);
+    public static ShopConents shopConents = new ShopConents(itemHolder.generateItemPrices(), 10000);
 
     public static Dictionary<Item, int> itemPrices = shopConents.getItemPrices(); 
 

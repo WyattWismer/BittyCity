@@ -60,11 +60,12 @@ public class InventControl : MonoBehaviour
 	void Start()
 	{
 		inventUI = new InventUI(bagItem1, bagItem2, bagItem3, inventoryPanel);
-
+        /*
 		inventory.addItem(new Item(1, "building", 100, "this is a building"));
 		inventory.addItem(new Item(2, "sidewalk", 20, "this is a sidewalk"));
 		inventory.addItem(new Item(2, "sidewalk", 20, "this is a sidewalk"));
 		inventory.addItem(new Item(3, "bomb", 200, "this is a bomb"));
+        */
 		inventUI.displayItems(InventControl.inventory.getInventoryDict());
 	}
 
