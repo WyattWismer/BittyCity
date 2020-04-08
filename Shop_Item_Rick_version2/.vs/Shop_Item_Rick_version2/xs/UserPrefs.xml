@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{CFEE8D18-E5CF-5F23-0582-4522E5F7F992}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ItemHolder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InventControl.cs">
     <Files>
-      <File FileName="Assets/Scripts/InventContent.cs" Line="10" Column="23" NotebookId="1" />
-      <File FileName="Assets/Scripts/InventUI.cs" Line="14" Column="120" NotebookId="1" />
-      <File FileName="Assets/Scripts/InventControl.cs" Line="23" Column="3" NotebookId="1" />
-      <File FileName="Assets/Scripts/ItemHolder.cs" Line="41" Column="30" NotebookId="1" />
+      <File FileName="Assets/Scripts/InventContent.cs" Line="29" Column="27" />
+      <File FileName="Assets/Scripts/InventUI.cs" Line="57" Column="6" />
+      <File FileName="Assets/Scripts/InventControl.cs" Line="34" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +11,7 @@
           <Node name="Shop_Item_Rick_version2" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="ItemHolder.cs" selected="True" />
+                <Node name="InventControl.cs" selected="True" />
               </Node>
             </Node>
           </Node>

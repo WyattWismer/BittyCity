@@ -26,6 +26,7 @@ public class InventControl : MonoBehaviour
 	{
 		string itemInfo = InventUI.selectedItem;
 		Debug.Log(InventUI.selectedItem);
+		itemHolder.generateItemPrices();
 		if (itemInfo == null) return;
 		Item item = itemHolder.itemConverter_inven(itemInfo);
 		int itemID = item.getItemID();
@@ -48,7 +49,7 @@ public class InventControl : MonoBehaviour
 
 	public void showInventory()
 	{
-		inventUI.displayItems(inventory.getInventoryDict());
+		inventUI.displayInventory();
 	}
 
 	public void hideInventory()

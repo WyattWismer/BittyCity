@@ -51,7 +51,10 @@ public class InventUI : ItemDisplayer
         }
         
     }
-    
+
+    public void displayInventory() {
+        SceneManager.LoadScene("Inventory");
+    }
 
     public void hideInventory()
     {

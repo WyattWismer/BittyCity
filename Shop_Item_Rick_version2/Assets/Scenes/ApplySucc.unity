@@ -171,7 +171,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 11832074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba803bf93fdb04db685f05c355c9094e, type: 3}
+  m_Script: {fileID: 11500000, guid: b2c4dc59e88634271b483ca4fe639a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11832077
@@ -218,7 +218,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11832076}
-        m_MethodName: returnToShopScreen
+        m_MethodName: displayInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
