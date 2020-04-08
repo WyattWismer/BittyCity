@@ -153,7 +153,7 @@ RectTransform:
   m_Children:
   - {fileID: 295883981}
   m_Father: {fileID: 1635855689}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -465,7 +465,7 @@ RectTransform:
   m_Children:
   - {fileID: 1028136726}
   m_Father: {fileID: 1635855689}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -693,7 +693,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1635855689}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1358,9 +1358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148c43e5c8df947acb7e6ce3c61463c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSelected: {fileID: 0}
-  shop: {fileID: 1205527729}
-  itemText: {fileID: 0}
 --- !u!1 &1522390423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,10 +1686,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2064066476}
   - {fileID: 77294994}
   - {fileID: 559937241}
   - {fileID: 310007842}
+  - {fileID: 2064066476}
   m_Father: {fileID: 1593370083}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1714,7 +1711,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightOffset: 0
-  bagItems: {fileID: 0}
+  bagItem1: {fileID: 46429418771843276, guid: 995a2a46cc5bf48e6b03f66d1678e746, type: 3}
+  bagItem2: {fileID: 8503792553766947989, guid: 339695b5ed4cb4653b400c8257cd549f,
+    type: 3}
+  bagItem3: {fileID: 5628041259942905729, guid: eada85d6f413848529bbe7dfd35abd1c,
+    type: 3}
   inventory: {fileID: 559937241}
 --- !u!114 &1635855691
 MonoBehaviour:
@@ -1861,7 +1862,7 @@ RectTransform:
   m_Children:
   - {fileID: 469090040}
   m_Father: {fileID: 1635855689}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

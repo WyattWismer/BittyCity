@@ -6,6 +6,7 @@ public class InventContent
 	private static Dictionary<int, int> inventory;
 
     public InventContent(){
+		inventory = new Dictionary<int, int>();
 		inventory.Add(1, 0);
 		inventory.Add(2, 0);
 		inventory.Add(3, 0);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventUI : ItemDisplayer
 {
@@ -46,21 +47,23 @@ public class InventUI : ItemDisplayer
         //change sence back to the original screen
     }
 
+    public static void displayApplySuccess()
+    {
+        SceneManager.LoadScene("ApplySucc");
+    }
+
     public void applyItems(List<Item> appliedItems)
     {
         foreach (Item item in appliedItems)
         {
-            InventControl.useItem(item);
+            InventControl.useItem();
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        InventControl inventControl = new InventControl();
-        inventControl.addItem(new Item(1, "building", 100, "this is a building"));
-        inventControl.addItem(new Item(1, "building", 100, "this is a building"));
-        inventControl.addItem(new Item(1, "building", 100, "this is a building"));
+        
         displayItems(InventControl.inventory.getInventoryDict());
         
     }

@@ -1,14 +1,11 @@
-﻿
-public class InventControl
-{
-	public static InventContent inventory;
-	private static InventUI inventUI;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-	public InventControl()
-	{
-		inventory = new InventContent();
-		inventUI = new InventUI();
-	}
+public class InventControl : MonoBehaviour
+{
+	public static InventContent inventory = new InventContent();
+	public static InventUI inventUI = new InventUI();
+	public static ItemHolder itemHolder = new ItemHolder();
 
 	public void addItem(Item i)
 	{
@@ -20,9 +17,13 @@ public class InventControl
 		inventory.removeItem(i);
 	}
 
-	public static void useItem(Item i)
+	public void useItem()
 	{
-		int itemID = i.getItemID();
+		string itemInfo = InventUI.selectedItem;
+		Debug.Log(InventUI.selectedItem);
+		if (itemInfo == null) return;
+		Item item = itemHolder.itemConverter(itemInfo);
+		int itemID = item.getItemID();
 		switch (itemID)
 		{
 			case 0:
@@ -35,17 +36,35 @@ public class InventControl
 				//place Bomb
 				break;
 		}
-		inventory.removeItem(i);
+		inventory.removeItem(item);
+
+        InventUI.displayApplySuccess();
 	}
 
-	public void showIventory()
+	public void showInventory()
 	{
-
 		inventUI.displayItems(inventory.getInventoryDict());
 	}
 
 	public void hideInventory()
 	{
 
+	}
+	// Start is called before the first frame update
+	void Start()
+	{
+
+		inventory.addItem(new Item(1, "building", 100, "this is a building"));
+		inventory.addItem(new Item(2, "building", 100, "this is a building"));
+		inventory.addItem(new Item(2, "building", 100, "this is a building"));
+		inventory.addItem(new Item(3, "building", 100, "this is a building"));
+		inventUI.displayItems(InventControl.inventory.getInventoryDict());
+
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		showInventory();
 	}
 }
