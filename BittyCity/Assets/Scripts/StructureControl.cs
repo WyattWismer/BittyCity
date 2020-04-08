@@ -9,6 +9,7 @@ public class StructureControl : MonoBehaviour
     public CityMetricsUI metrics;
     public StructuresInfo sidewalkInfo;
     public StructuresInfo buildingInfo;
+    public AchievementControl achievementWindow;
     
 
     static private int gridWidth = 25;
@@ -41,6 +42,19 @@ public class StructureControl : MonoBehaviour
         grid[i, j] = 1;
         metrics.setNumSidewalks(metrics.getNumSidewalks() + 1);
         metrics.setNumPoints(metrics.getNumPoints() + 100);
+        int numSidewalks = metrics.getNumSidewalks();
+        if(numSidewalks > 0)
+        {
+            achievementWindow.NotificationUpdate("Achievement Unlocked: Sidewalks", "You have " + numSidewalks.ToString() + " sidewalks! $500 had been added.");
+        }
+/*        if (numSidewalks == 11)
+        {
+            achievementWindow.NotificationUpdate("Achievement Unlocked: Sidewalks I", "You have 10 sidewalks! $500 had been added.");
+        }
+        if (numSidewalks == 12)
+        {
+            achievementWindow.NotificationUpdate("Achievement Unlocked: Sidewalks I", "You have 10 sidewalks! $500 had been added.");
+        }*/
     }
 
     public void removeSidewalk(int i, int j)
@@ -312,7 +326,7 @@ public class StructureControl : MonoBehaviour
     }
 }
 
-
+[System.Serializable]
 public class Node : System.IComparable
 {
     public int i;

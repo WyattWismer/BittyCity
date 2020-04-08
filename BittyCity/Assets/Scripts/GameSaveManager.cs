@@ -40,10 +40,18 @@ public class GameSaveManager : MonoBehaviour
     }
 
 
+    public void SaveGameTuples()
+    {
+
+    }
 
     public void SaveGame()
     {
         cityState = cityControl.SaveCity();
+/*        cityState.test = new List<int>();
+        cityState.test.Add(1);
+        cityState.test.Add(2);
+        cityState.test.Add(3);*/
 
         if (!hasSaveFile())
         {
@@ -67,6 +75,16 @@ public class GameSaveManager : MonoBehaviour
 
     public void LoadGame()
     {
+<<<<<<< HEAD
+        /*        var info = new DirectoryInfo(Application.persistentDataPath + "/save_games");
+                var fileInfo = info.GetFiles();
+                foreach (var file in fileInfo)
+                {
+                    print(file);
+                }*/
+        CityState cityState2 = new CityState();
+        if (!Directory.Exists(Application.persistentDataPath + "/save_games/" + metrics.getCityName()));
+=======
 /*        var info = new DirectoryInfo(Application.persistentDataPath + "/save_games");
         var fileInfo = info.GetFiles();
         foreach (var file in fileInfo)
@@ -75,18 +93,26 @@ public class GameSaveManager : MonoBehaviour
         }*/
         /*
         if (!Directory.Exists(Application.persistentDataPath + "/save_games/" + cityState.cityName)) ;
+>>>>>>> fd0f4f2eae448472a04229a85709f8ceca6844d4
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/save_games/" + cityState.cityName);
         }
         */
         BinaryFormatter bf = new BinaryFormatter();
+<<<<<<< HEAD
+        if (File.Exists(Application.persistentDataPath + "/save_games/" + metrics.getCityName() + "/" + metrics.getCityName() + ".json")) 
+        {
+            FileStream file = File.Open(Application.persistentDataPath + "/save_games/" + metrics.getCityName() + "/" + metrics.getCityName() + ".json", FileMode.Open);
+            JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), cityState2);
+=======
         if (File.Exists(Application.persistentDataPath + "/save_games/"  + cityState.cityName + ".json")) 
         {
             FileStream file = File.Open(Application.persistentDataPath + "/save_games/" + cityState.cityName + ".json", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), cityState);
+>>>>>>> fd0f4f2eae448472a04229a85709f8ceca6844d4
             file.Close();
         }
-        cityControl.LoadCity(cityState);
+        cityControl.LoadCity(cityState2);
     }
 }
 

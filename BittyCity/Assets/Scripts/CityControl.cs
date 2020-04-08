@@ -88,6 +88,7 @@ public class CityControl : MonoBehaviour
 
 public class CityState
 {
+    //public List<int> test;
     public string cityName;
     public float timeRemaining;
     public List<Node> citizens, sidewalks, buildings;
